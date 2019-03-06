@@ -1,1 +1,91 @@
-public static void main
+/*  Author: Kevin Xu
+ *  ICS4U  Mr. Anandarajan
+ *  Date: Mar.5 . 2019
+ */
+
+import java.util.Scanner; 
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class codebreaker{
+  static Scanner input = new Scanner(System.in);
+  public static void main(String args[]){
+    String[] colour = {"Y", "G", "B", "O", "P", "R"};
+    String[] code = new String[4];
+    String[] inputCode = {"Y", "B", "O", "O"};
+    String[] check = new String[4];
+    int size = 4;
+    createCode(colour, size, code);
+    for(int i = 0; i < size; i++)
+    {
+      System.out.print(code[i]+" ");
+      System.out.println(" ");
+    }
+    findFullyCorrect(code, inputCode, check);
+
+    findColourCorrect(code, inputCode, check);
+    for(int i = 0; i < size;i++)
+    {
+      System.out.print(check[i]);
+    }
+  }
+  
+  public static String[] createCode(String[] colour, int size, String[] code)
+  {
+    for(int i = 0; i < size; i++)
+    {
+      int index = (int)(Math.random()*6);
+      code[i] = colour[index];
+    }
+    
+    return code;
+    
+  }
+  
+  public static String[] findFullyCorrect(String[] code, String[] inputCode, String[] check)
+  {
+    for(int i = 0; i < 4; i++)
+    {
+      if(code[i] == inputCode[i])
+      {
+        check[i] = "b";
+      }
+      else
+      {
+        check[i] = "";
+      }
+    }
+//    List<String> checkList = Arrays.asList(check);
+//    Collections.shuffle(checkList);
+//    check = checkList.toArray(check);
+    
+    return check;
+  }
+  
+  public static String[] findColourCorrect(String[] code, String[] inputCode, String[] check)
+  {
+    for(int i = 0; i < 4; i++)
+    {
+    
+      
+      for(int j = 0; j < 4; j++)
+      {
+        
+        
+        if(inputCode[i] == code[j] && i != j)
+        {
+          check[i] = "w";
+          
+        }
+      }
+    }
+//    List<String> checkList = Arrays.asList(check);
+//    Collections.shuffle(checkList);
+//    check = checkList.toArray(check);
+    
+    return check;
+  }
+}
